@@ -13,7 +13,7 @@
 	// import { base } from "$app/paths";
 	import { useSettingsStore } from "$lib/stores/settings";
 
-	export let currentModel: Model;
+	// export let currentModel: Model;
 	export let models: Model[];
 
 	const settings = useSettingsStore();
