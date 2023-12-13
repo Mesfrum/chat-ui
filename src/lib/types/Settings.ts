@@ -21,8 +21,15 @@ export interface Settings extends Timestamps {
 }
 
 // TODO: move this to a constant file along with other constants
+// export const DEFAULT_SETTINGS = {
+// 	shareConversationsWithModelAuthors: true,
+// 	activeModel: defaultModel.id,
+// 	hideEmojiOnSidebar: false,
+// };
+
 export const DEFAULT_SETTINGS = {
 	shareConversationsWithModelAuthors: true,
+       ethicsModalAccepted: true,
+       ethicsModalAcceptedAt: new Date(),
 	activeModel: defaultModel.id,
-	hideEmojiOnSidebar: false,
 };
