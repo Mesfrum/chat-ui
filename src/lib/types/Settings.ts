@@ -29,7 +29,7 @@ export interface Settings extends Timestamps {
 
 export const DEFAULT_SETTINGS = {
 	shareConversationsWithModelAuthors: false,
-       ethicsModalAccepted: true,
-       ethicsModalAcceptedAt: new Date(),
+	ethicsModalAccepted: true, 
+	ethicsModalAcceptedAt: new Date(),
 	activeModel: defaultModel.id,
 };

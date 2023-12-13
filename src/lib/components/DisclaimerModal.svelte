@@ -9,6 +9,7 @@
 	import Logo from "./icons/Logo.svelte";
 
 	const settings = useSettingsStore();
+	$settings.ethicsModalAccepted = true
 </script>
 
 <Modal>
