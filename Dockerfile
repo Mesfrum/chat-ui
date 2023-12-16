@@ -10,7 +10,7 @@ RUN --mount=type=cache,target=/app/.npm \
         npm set cache /app/.npm && \
         npm ci --omit=dev
 
-FROM builder-production as builder
+FROM builder-production AS builder
 
 RUN --mount=type=cache,target=/app/.npm \
         npm set cache /app/.npm && \
@@ -29,4 +29,4 @@ COPY --from=builder-production /app/node_modules /app/node_modules
 COPY --link --chown=1000 package.json /app/package.json
 COPY --from=builder /app/build /app/build
 
-CMD pm2 start /app/build/index.js -i $CPU_CORES --no-daemon
+CMD pm2 start /app/build/index.js -i "$CPU_CORES" --no-daemon

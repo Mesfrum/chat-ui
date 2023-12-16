@@ -138,13 +138,13 @@
 		on:click={() => (isTapped = !isTapped)}
 		on:keypress={() => (isTapped = !isTapped)}
 	>
-		<img
+		<!-- <img
 			alt=""
 			src="https://huggingface.co/avatars/2edb18bd0206c16b433841a47f53fa8e.svg"
 			class="mt-5 h-3 w-3 flex-none select-none rounded-full shadow-lg"
-		/>
+		/> -->
 		<div
-			class="relative min-h-[calc(2rem+theme(spacing[3.5])*2)] min-w-[60px] break-words rounded-2xl border border-gray-100 bg-gradient-to-br from-gray-50 px-5 py-3.5 text-gray-600 prose-pre:my-2 dark:border-gray-800 dark:from-gray-800/40 dark:text-gray-300"
+			class="relative min-h-[calc(2rem+theme(spacing[3.5])*2)] w-[99%] min-w-[60px] break-words rounded-md border border-gray-100 bg-gradient-to-br from-gray-50 px-5 py-3.5 text-gray-600 prose-pre:my-2 dark:border-gray-800 dark:from-gray-800/40 dark:text-gray-300"
 		>
 			{#if searchUpdates && searchUpdates.length > 0}
 				<OpenWebSearchResults
@@ -233,7 +233,12 @@
 	</div>
 {/if}
 {#if message.from === "user"}
-	<div class="group relative flex items-start justify-start gap-4 max-sm:text-sm">
+	<div class="group relative flex items-start justify-start gap-2 max-sm:text-sm md:gap-2">
+		<img
+			alt=""
+			src="https://huggingface.co/avatars/2edb18bd0206c16b433841a47f53fa8e.svg"
+			class="mt-5 h-3 w-3 flex-none select-none rounded-full shadow-lg"
+		/>
 		<div class="flex flex-col">
 			{#if message.files && message.files.length > 0}
 				<div class="mx-auto grid w-fit grid-cols-2 gap-5 px-5">
@@ -258,12 +263,12 @@
 			{/if}
 
 			<div
-				class="max-w-full whitespace-break-spaces break-words rounded-2xl px-5 py-3.5 text-gray-500 dark:text-gray-400"
+				class="max-w-full whitespace-break-spaces break-words rounded-2xl px-3 py-3.5 text-gray-500 dark:text-gray-400"
 			>
 				{message.content.trim()}
 			</div>
 			{#if !loading}
-				<div class="absolute right-0 top-3.5 flex gap-2 lg:-right-2">
+				<div class="absolute right-0 bottom-0 flex gap-2 lg:-right-2">
 					{#if downloadLink}
 						<a
 							class="rounded-lg border border-gray-100 p-1 text-xs text-gray-400 group-hover:block hover:text-gray-500 dark:border-gray-800 dark:text-gray-400 dark:hover:text-gray-300 md:hidden"
