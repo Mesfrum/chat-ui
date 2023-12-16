@@ -1,30 +1,30 @@
 <script lang="ts">
 	import { PUBLIC_APP_NAME, PUBLIC_VERSION } from "$env/static/public";
-	import { PUBLIC_ANNOUNCEMENT_BANNERS } from "$env/static/public";
+	// import { PUBLIC_ANNOUNCEMENT_BANNERS } from "$env/static/public";
 	import { PUBLIC_APP_DESCRIPTION } from "$env/static/public";
 	import Logo from "$lib/components/icons/Logo.svelte";
-	import { createEventDispatcher } from "svelte";
+	// import { createEventDispatcher } from "svelte";
 	// import IconGear from "~icons/bi/gear-fill";
 	// import CarbonArrowUpRight from "~icons/carbon/arrow-up-right";
 	// import AnnouncementBanner from "../AnnouncementBanner.svelte";
-	import type { Model } from "$lib/types/Model";
+	// import type { Model } from "$lib/types/Model";
 	// import ModelCardMetadata from "../ModelCardMetadata.svelte";
-	import { findCurrentModel } from "$lib/utils/models";
+	// import { findCurrentModel } from "$lib/utils/models";
 	// import { base } from "$app/paths";
-	import { useSettingsStore } from "$lib/stores/settings";
+	// import { useSettingsStore } from "$lib/stores/settings";
 
 	// export let currentModel: Model;
-	export let models: Model[];
+	// export let models: Model[];
 
-	const settings = useSettingsStore();
+	// const settings = useSettingsStore();
 
-	$: currentModelMetadata = findCurrentModel(models, $settings.activeModel);
+	// $: currentModelMetadata = findCurrentModel(models, $settings.activeModel);
 
 	// const announcementBanners = PUBLIC_ANNOUNCEMENT_BANNERS
 	// 	? JSON.parse(PUBLIC_ANNOUNCEMENT_BANNERS)
 	// 	: [];
 
-	const dispatch = createEventDispatcher<{ message: string }>();
+	// const dispatch = createEventDispatcher<{ message: string }>();
 </script>
 
 <div class="my-auto grid gap-8 lg:grid-cols-3">
@@ -74,7 +74,7 @@
 			<ModelCardMetadata variant="dark" model={currentModel} />
 		</div>
 	</div> -->
-	{#if currentModelMetadata.promptExamples}
+	<!-- {#if currentModelMetadata.promptExamples}
 		<div class="lg:col-span-3 lg:mt-6">
 			<p class="mb-3 text-gray-600 dark:text-gray-300">Examples</p>
 			<div class="grid gap-3 lg:grid-cols-3 lg:gap-5">
@@ -88,5 +88,5 @@
 					</button>
 				{/each}
 			</div>
-		</div>{/if}
+		</div>{/if} -->
 </div>
