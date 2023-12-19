@@ -36,7 +36,7 @@
 </script>
 
 <div
-	class="scrollbar-custom mr-1 h-full overflow-y-auto"
+	class="scrollbar-custom mr-1 h-full overflow-y-auto mt-10"
 	use:snapScrollToBottom={messages.length ? [...messages, ...webSearchMessages] : false}
 	bind:this={chatContainer}
 >

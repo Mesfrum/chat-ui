@@ -113,6 +113,11 @@
 		}
 		$settings.activeModel = $page.url.searchParams.get("model") ?? $settings.activeModel;
 	}
+
+	let tabClicked = [true, false, false];
+	const handleTabClick = (index: number) => {
+		tabClicked = tabClicked.map((_, i) => i === index);
+	};
 </script>
 
 <svelte:head>
@@ -150,6 +155,29 @@
 <div
 	class="grid h-full w-screen grid-cols-1 grid-rows-[auto,1fr] overflow-hidden text-smd dark:text-gray-300 md:grid-cols-[280px,1fr] md:grid-rows-[1fr]"
 >
+	<nav
+		class="absolute top-1 ml-[18%] w-[82%] rounded-b-md border-b-[0.5px] border-slate-600 bg-[#111827] px-6 pt-1 text-white z-[99999]"
+	>
+		<div class="flex justify-between">
+			<div class="flex space-x-2">
+				{#each tabClicked as clicked, index}
+					<button
+						class="group flex h-10 flex-none items-center gap-1.5 rounded-t-md pl-3.5 pr-3 text-gray-600 hover:bg-gray-100 hover:text-gray-300 dark:text-gray-300 dark:hover:bg-gray-700"
+						class:selected={clicked}
+						on:click={() => handleTabClick(index)}
+					>
+						{#if index === 0}
+							Legal QA
+						{:else if index === 1}
+							Legal Research
+						{:else if index === 2}
+							Document Generation
+						{/if}
+					</button>
+				{/each}
+			</div>
+		</div>
+	</nav>
 	<MobileNav
 		isOpen={isNavOpen}
 		on:toggle={(ev) => (isNavOpen = ev.detail)}
@@ -179,3 +207,9 @@
 	{/if}
 	<slot />
 </div>
+
+<style>
+	.selected {
+		background-color: #374151;
+	}
+</style>
