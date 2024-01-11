@@ -43,7 +43,7 @@ export function endpointLlamacpp(
 				n_predict: model.parameters.max_new_tokens,
 			}),
 		});
-
+		console.log("Response structure: LLAMACPP", r); 
 		if (!r.ok) {
 			throw new Error(`Failed to generate text: ${await r.text()}`);
 		}

@@ -7,6 +7,7 @@
 	import { pendingMessage } from "$lib/stores/pendingMessage";
 	import { useSettingsStore } from "$lib/stores/settings.js";
 	import { findCurrentModel } from "$lib/utils/models";
+	import DocGen from "$lib/components/chat/DocGen.svelte";
 
 	export let data;
 	let loading = false;
@@ -64,3 +65,4 @@
 	models={data.models}
 	bind:files
 />
+<!-- <DocGen></DocGen> -->

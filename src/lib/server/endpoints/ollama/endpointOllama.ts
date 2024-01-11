@@ -41,6 +41,8 @@ export function endpointOllama(input: z.input<typeof endpointOllamaParametersSch
 				},
 			}),
 		});
+		
+		console.log("Response structure: OLLAMA", r); 
 
 		if (!r.ok) {
 			throw new Error(`Failed to generate text: ${await r.text()}`);

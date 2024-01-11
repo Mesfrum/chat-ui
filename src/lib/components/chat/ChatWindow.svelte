@@ -48,7 +48,36 @@
 
 	const handleSubmit = () => {
 		if (loading) return;
-		dispatch("message", message);
+
+		if (message.toLowerCase().includes("testing")) {
+			const parameterRegex =
+				/(\b(temperature|repetition_penalty|top_k|top_p|max_new_tokens|truncate)=([\d.]+))/gi;
+			const matches = message.match(parameterRegex);
+			message = message.replace(/testing/gi, "");
+
+			// console.log('matches',matches);
+
+			if (currentModel.parameters !== undefined && matches) {
+				matches.forEach((match) => {
+					const [param, value] = match.split("=");
+					if (currentModel.parameters !== undefined && param in currentModel.parameters) {
+						// console.log(`Changing ${param} to ${parseFloat(value)}`);
+						currentModel.parameters[param] = parseFloat(value);
+						message = message.replace(match, ""); // Remove the matched parameter
+					}
+				});
+
+				console.log(message);
+				dispatch("message", message);
+				console.log(currentModel.parameters);
+			} else {
+				console.log('The message does not contain "testing" or matched parameters.');
+			}
+		} else {
+			console.log("no testing found ");
+			dispatch("message", message);
+		}
+
 		message = "";
 	};
 
@@ -109,7 +138,7 @@
 	/>
 
 	<div
-		class="dark:via-gray-80 pointer-events-none absolute inset-x-0 bottom-0 z-0 mx-auto flex w-full max-w-3xl flex-col items-center justify-center bg-gradient-to-t from-white via-white/80 to-white/0 px-3.5 pt-4 pb-2 dark:border-gray-800 dark:from-gray-900 dark:to-gray-900/0 max-md:border-t max-md:bg-white max-md:dark:bg-gray-900 sm:px-5 md:pt-8 xl:max-w-4xl [&>*]:pointer-events-auto"
+		class="dark:via-gray-80 pointer-events-none absolute inset-x-0 bottom-0 z-0 mx-auto flex w-full max-w-3xl flex-col items-center justify-center bg-gradient-to-t from-white via-white/80 to-white/0 px-3.5 pb-2 pt-4 dark:border-gray-800 dark:from-gray-900 dark:to-gray-900/0 max-md:border-t max-md:bg-white max-md:dark:bg-gray-900 sm:px-5 md:pt-8 xl:max-w-4xl [&>*]:pointer-events-auto"
 	>
 		{#if sources.length}
 			<div class="flex flex-row flex-wrap justify-center gap-2.5 max-md:pb-3">
@@ -205,6 +234,7 @@
 								class="btn mx-1 my-1 h-[2.4rem] self-end rounded-lg bg-transparent p-1 px-[0.7rem] text-gray-400 disabled:opacity-60 enabled:hover:text-gray-700 dark:disabled:opacity-40 enabled:dark:hover:text-gray-100"
 								disabled={!message || isReadOnly}
 								type="submit"
+								on:click={console.log(models)}
 							>
 								<CarbonSendAltFilled />
 							</button>
@@ -215,7 +245,7 @@
 			<div
 				class="mt-2 flex justify-between self-stretch px-1 text-xs text-gray-400/90 max-md:mb-2 max-sm:gap-2"
 			>
-				<p>
+				<!-- <p>
 					Model: <a
 						href={currentModel.modelUrl || "https://huggingface.co/" + currentModel.name}
 						target="_blank"
@@ -223,14 +253,14 @@
 						class="hover:underline">{currentModel.displayName}</a
 					> <span class="max-sm:hidden">·</span><br class="sm:hidden" /> Generated content may be inaccurate
 					or false.
-				</p>
+				</p> -->
 				{#if messages.length}
 					<button
 						class="flex flex-none items-center hover:text-gray-400 hover:underline max-sm:rounded-lg max-sm:bg-gray-50 max-sm:px-2.5 dark:max-sm:bg-gray-800"
 						type="button"
 						on:click={() => dispatch("share")}
 					>
-						<CarbonExport class="text-[.6rem] sm:mr-1.5 sm:text-primary-500" />
+						<CarbonExport class="sm:text-primary-500 text-[.6rem] sm:mr-1.5" />
 						<div class="max-sm:hidden">Share this conversation</div>
 					</button>
 				{/if}
